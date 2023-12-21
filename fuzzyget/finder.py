@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-from venv import logger
-=======
->>>>>>> a3a9133 (add: fuzzy finding logic)
 from logger import get_logger
 
 from thefuzz import process as fuzz_process
