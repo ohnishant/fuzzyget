@@ -8,11 +8,16 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.10"
 thefuzz = "0.20.0"
-fastapi = {extras = ["all"], version = "^0.105.0"}
+fastapi = { extras = ["all"], version = "^0.105.0" }
 
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.3"
+
+[tool.pytest.ini_options]
+addopts = ["-ra", "--showlocals", "--strict-markers", "--strict-config"]
+log_cli_level = "info"
+testpaths = ["tests"]
 
 [build-system]
 requires = ["poetry-core"]
