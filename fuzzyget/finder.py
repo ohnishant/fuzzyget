@@ -33,7 +33,17 @@ def finder(user: str, phrase: str) -> list:
 
     except FileNotFoundError:
         LOGGER.error(f"File not found: {user}.txt")
-        return list("User not found!")
+        return ["User not found!"]
 
 
-print(finder("nllsh", "b"))
+if __name__ == "__main__":
+    from sys import argv, exit
+
+    if len(argv) < 3:
+        LOGGER.error("""USAGE python3 finder.py <filename> <search phrase ....>""")
+        exit(1)
+
+    filename = argv[1]
+    search_term = " ".join(argv[2:])
+
+    print(finder(filename, search_term))
