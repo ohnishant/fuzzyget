@@ -3,8 +3,8 @@ import pytest
 
 
 def test_file_reading():
-    assert finder.finder("nllsh", "poggy") == ("yo!",)
+    assert finder.find("nllsh", "poggy") == ("yo!",)
 
 
 def test_file_doesnt_exit():
-    assert finder.finder("twitchuser1234", "poggy") == ("User not found!",)
+    assert finder.find("twitchuser1234", "poggy") == ("User not found!",)

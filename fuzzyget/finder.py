@@ -1,12 +1,13 @@
-from logger import get_logger
+import asyncio
 
+from .logger import get_logger
 from thefuzz import process as fuzz_process
 
 LOGGER = get_logger()
 MATCH_LIMIT = 3
 
 
-def compare(lines: list[str], phrase: str) -> list[str]:
+async def compare(lines: list[str], phrase: str) -> list[str]:
     global LOGGER
 
     matches = list()
@@ -22,14 +23,14 @@ def compare(lines: list[str], phrase: str) -> list[str]:
     return matches
 
 
-def finder(user: str, phrase: str) -> list:
+async def find(user: str, phrase: str) -> list:
     global LOGGER
     try:
         with open(f"./userdata/{user}.txt") as f:
             contents: list[str] = f.readlines()
             LOGGER.info(f"File found: {user}.txt")
             matches = compare(contents, phrase)
-            return matches
+            return await matches
 
     except FileNotFoundError:
         LOGGER.error(f"File not found: {user}.txt")
@@ -46,4 +47,6 @@ if __name__ == "__main__":
     filename = argv[1]
     search_term = " ".join(argv[2:])
 
-    print(finder(filename, search_term))
+    results = asyncio.run(find(filename, search_term))
+    result_string = "\n".join(results)
+    print(result_string)
